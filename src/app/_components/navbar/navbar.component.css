@@ -27,3 +27,24 @@
   font-weight: 600;
   color: var(--text-color);
 }
+
+
+@media(min-width: 1440px){
+  .header{
+    padding: 0 80px;
+  }
+
+  .header .title{
+    font-size: 1.5rem;
+    font-weight: 800;
+    line-height: normal;
+  }
+
+  .header .darkMode-container{
+    cursor: pointer;
+  }
+
+  .header span{
+    font-size: 1rem;
+  }
+}
