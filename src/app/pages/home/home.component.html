@@ -10,7 +10,6 @@
         </g>
         </g>
         </svg>
-
     </div>
     <ul class="menu">
       <li>Africa</li>
@@ -21,3 +20,9 @@
     </ul>
   </div>
 </div>
+<ul>
+  <li *ngFor="let country of (countries | async)">
+    <!-- <app-card [country]="country"></app-card> -->
+    {{country.languages}}
+  </li>
+</ul>
