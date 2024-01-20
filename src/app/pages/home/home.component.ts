@@ -7,7 +7,13 @@ import { Component } from '@angular/core';
 })
 export class HomeComponent {
 
+  dropdownOpened = false;
+
   searchContry(search: any){
     console.log(search);
+  }
+
+  dropdownToggle(){
+    this.dropdownOpened = !this.dropdownOpened;
   }
 }
