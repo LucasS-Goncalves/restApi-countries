@@ -1,7 +1,6 @@
 :host{
   position: relative;
   display: inline-block;
-  margin-top: 24px;
   width: 343px;
   height: 48px;
 }
@@ -33,7 +32,6 @@ input{
   :host{
     width: 480px;
     height: 56px;
-    margin-top: 48px;
   }
 
   input{
