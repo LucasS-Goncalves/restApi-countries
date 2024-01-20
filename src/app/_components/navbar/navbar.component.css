@@ -5,7 +5,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 0 16px;
-  background: var(--white);
+  background: var(--elements-color);
   box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.06);
 }
 
@@ -16,7 +16,9 @@
   color: var(--text-color);
 }
 
-.header .darkMode-container{
+.header .darkMode-button{
+  border: none;
+  background-color: transparent;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -40,7 +42,7 @@
     line-height: normal;
   }
 
-  .header .darkMode-container{
+  .header .darkMode-button{
     cursor: pointer;
   }
 
