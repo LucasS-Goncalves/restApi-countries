@@ -1,8 +1,8 @@
 <div class="input-dropdown-container">
-  <app-search-country (searchCountry)="searchContry($event)"></app-search-country>
+  <app-search-country #appSearch></app-search-country>
   <div class="dropdown" (click)="dropdownToggle()" [ngClass]="{'dropdownOpened': dropdownOpened}">
     <div class="select">
-      <span>Filter by Region</span>
+      <span>{{region}}</span>
       <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
         <g id="Group 2">
         <g id="expand-more">
@@ -12,16 +12,17 @@
         </svg>
     </div>
     <ul class="menu">
-      <li>Africa</li>
-      <li>America</li>
-      <li>Asia</li>
-      <li>Europe</li>
-      <li>Oceania</li>
+      <li (click)="filterByRegion('Africa')">Africa</li>
+      <li (click)="filterByRegion('America')">America</li>
+      <li (click)="filterByRegion('Asia')">Asia</li>
+      <li (click)="filterByRegion('Europe')">Europe</li>
+      <li (click)="filterByRegion('Oceania')">Oceania</li>
     </ul>
   </div>
+  <button class="resetButton" (click)="reset()">Reset filters</button>
 </div>
 <ul class="countriesList">
-  <li *ngFor="let country of (countries | async)">
+  <li *ngFor="let country of (countries$ | async)">
     <app-card [country]="country"></app-card>
   </li>
 </ul>

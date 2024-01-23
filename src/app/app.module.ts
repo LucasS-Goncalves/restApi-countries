@@ -11,6 +11,7 @@ import { CardComponent } from './_components/card/card.component';
 import { ApiCurrencyPipe } from './_pipes/api-currency.pipe';
 import { ApiLanguagePipe } from './_pipes/api-language.pipe';
 import { ApiCountryNamePipe } from './_pipes/api-country-name.pipe';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { ApiCountryNamePipe } from './_pipes/api-country-name.pipe';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

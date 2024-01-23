@@ -1,4 +1,5 @@
-import { Component, EventEmitter } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { CountriesApiService } from 'src/app/_services/countries-api.service';
 
 @Component({
   selector: 'app-search-country',
@@ -7,9 +8,11 @@ import { Component, EventEmitter } from '@angular/core';
 })
 export class SearchCountryComponent {
 
-  searchContryValue = new EventEmitter<string>();
+  @Input() inputString = '';
 
-  searchCountry(search: string){
-    this.searchContryValue.emit(search);
+  constructor(private countriesApiService: CountriesApiService){}
+
+  searchCountry(){
+    this.countriesApiService.seachCountryEvent.emit(this.inputString);
   }
 }

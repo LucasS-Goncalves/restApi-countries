@@ -1,4 +1,5 @@
 .input-dropdown-container{
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 40px;
@@ -79,6 +80,19 @@
   visibility: visible;
 }
 
+.input-dropdown-container .resetButton{
+  position: absolute;
+  bottom: 24px;
+  left: 240px;
+  transform: translateY(50%);
+  border: none;
+  outline: none;
+  background-color: var(--elements-color);
+  padding: 5px 10px;
+  border-radius: 5px;
+  color: var(--text-color);
+}
+
 .countriesList{
   display: grid;
   grid-template-columns: 264px;
@@ -101,6 +115,14 @@
   .countriesList{
     grid-template-columns: 264px 264px 264px;
     margin-top: 48px;
+  }
+
+  .input-dropdown-container .resetButton{
+    cursor: pointer;
+  }
+
+  .input-dropdown-container .resetButton:hover{
+    box-shadow: inset 0px 2px 30px 0px rgba(0, 0, 0, 0.1);
   }
 }
 
@@ -140,5 +162,10 @@
 
   .input-dropdown-container .dropdown .menu li:hover{
     box-shadow: inset 0px 2px 30px 0px rgba(0, 0, 0, 0.2);
+  }
+
+  .input-dropdown-container .resetButton{
+    left: initial;
+    right: 310px;
   }
 }
