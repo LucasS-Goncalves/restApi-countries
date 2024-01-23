@@ -7,6 +7,7 @@ import { ICountry } from '../_interfaces/ICountry';
 export class ApiCurrencyPipe implements PipeTransform {
 
   transform(value: any, ...args: any[]): any {
+    if(value === undefined) return;
     const valueToTransform = (Object.values(value)[0] as ICountry)['name'];
     return valueToTransform;
   }

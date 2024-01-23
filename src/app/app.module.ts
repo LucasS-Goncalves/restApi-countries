@@ -10,6 +10,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { CardComponent } from './_components/card/card.component';
 import { ApiCurrencyPipe } from './_pipes/api-currency.pipe';
 import { ApiLanguagePipe } from './_pipes/api-language.pipe';
+import { ApiCountryNamePipe } from './_pipes/api-country-name.pipe';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { ApiLanguagePipe } from './_pipes/api-language.pipe';
     HomeComponent,
     CardComponent,
     ApiCurrencyPipe,
-    ApiLanguagePipe
+    ApiLanguagePipe,
+    ApiCountryNamePipe
   ],
   imports: [
     BrowserModule,

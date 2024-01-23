@@ -20,9 +20,8 @@
     </ul>
   </div>
 </div>
-<ul>
+<ul class="countriesList">
   <li *ngFor="let country of (countries | async)">
-    <!-- <app-card [country]="country"></app-card> -->
-    {{country.languages}}
+    <app-card [country]="country"></app-card>
   </li>
 </ul>

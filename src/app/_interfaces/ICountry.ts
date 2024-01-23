@@ -17,6 +17,7 @@ export interface ICountry {
   capital: string[],
   tld: string[],
   currencies: any,
-  languages: any
+  languages: any,
+  borders: string[]
 
 }

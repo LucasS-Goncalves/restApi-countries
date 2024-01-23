@@ -5,9 +5,15 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class ApiLanguagePipe implements PipeTransform {
 
-  transform(value: unknown, ...args: unknown[]): unknown {
-    // const valueToTransform = Object.values();
+  transform(value: any, ...args: any[]): any {
+    if(value == undefined) return;
+    const valueToTransform = Object.values(value);
+    if(valueToTransform) return valueToTransform;
     return null;
   }
 
 }
+
+// <p *ngFor="let languages of (country.languages | apiLanguage)">
+//       {{languages }}
+//     </p>

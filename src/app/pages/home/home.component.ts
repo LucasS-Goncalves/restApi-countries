@@ -17,16 +17,9 @@ export class HomeComponent implements OnInit{
 
   ngOnInit(): void {
     this.countries = this.countriesApiService.getCountries();
-    this.countriesApiService.getCountries().subscribe({
-      next: res => console.log(Object.values(res[54].languages))
-    })
   }
 
   searchContry(search: any){
-    console.log(search);
-  }
-
-  getContriesInfo(){
 
   }
 

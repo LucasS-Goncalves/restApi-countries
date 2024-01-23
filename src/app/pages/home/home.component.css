@@ -79,6 +79,37 @@
   visibility: visible;
 }
 
+.countriesList{
+  display: grid;
+  grid-template-columns: 264px;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  margin-top: 32px;
+}
+
+@media(min-width: 730px){
+
+  .countriesList{
+    grid-template-columns: 264px 264px;
+    gap: 75px;
+  }
+}
+
+@media(min-width: 1100px){
+
+  .countriesList{
+    grid-template-columns: 264px 264px 264px;
+    margin-top: 48px;
+  }
+}
+
+@media(min-width: 1440px){
+
+  .countriesList{
+    grid-template-columns: 264px 264px 264px 264px;
+  }
+}
 
 @media(min-width: 1440px){
 
