@@ -12,6 +12,7 @@ import { ApiCurrencyPipe } from './_pipes/api-currency.pipe';
 import { ApiLanguagePipe } from './_pipes/api-language.pipe';
 import { ApiCountryNamePipe } from './_pipes/api-country-name.pipe';
 import { FormsModule } from '@angular/forms';
+import { CountryDetailsComponent } from './pages/country-details/country-details.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { FormsModule } from '@angular/forms';
     CardComponent,
     ApiCurrencyPipe,
     ApiLanguagePipe,
-    ApiCountryNamePipe
+    ApiCountryNamePipe,
+    CountryDetailsComponent
   ],
   imports: [
     BrowserModule,

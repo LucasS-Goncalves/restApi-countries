@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
 import { ICountry } from 'src/app/_interfaces/ICountry';
 
 @Component({
@@ -8,4 +9,10 @@ import { ICountry } from 'src/app/_interfaces/ICountry';
 })
 export class CardComponent {
   @Input() country!: ICountry;
+
+  constructor(private router: Router){}
+
+  loadCountry(){
+    this.router.navigate([this.country.name.common]);
+  }
 }

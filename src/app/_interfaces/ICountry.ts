@@ -1,11 +1,7 @@
 export interface ICountry {
   name: {
     common: string,
-    nativeName: {
-      cat: {
-        official: string
-      }
-    }
+    official: string
   },
   flags: {
     svg: string,

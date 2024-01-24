@@ -34,6 +34,7 @@ export class HomeComponent implements OnInit, OnDestroy{
       distinctUntilChanged(),
     ).subscribe({
       next: (res: string) => {
+        if(res.length === 0) return;
         this.countries$ = this.countriesApiService.searchByCountryName(res);
       }
     });
@@ -41,13 +42,9 @@ export class HomeComponent implements OnInit, OnDestroy{
 
   filterByRegion(region: string){
     if(this.region === region) return;
-    this.appSearch.inputString = '';
     this.region = region;
+    this.appSearch.inputString = '';
     this.countries$ = this.countriesApiService.filterByRegion(region);
-  }
-
-  dropdownToggle(){
-    this.dropdownOpened = !this.dropdownOpened;
   }
 
   reset(){
@@ -55,6 +52,10 @@ export class HomeComponent implements OnInit, OnDestroy{
     this.appSearch.inputString = '';
     this.region = this.regionDefaultText;
     this.countries$ = this.countriesApiService.resetFilters();
+  }
+
+  dropdownToggle(){
+    this.dropdownOpened = !this.dropdownOpened;
   }
 
   ngOnDestroy(): void {
