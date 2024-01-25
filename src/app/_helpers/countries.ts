@@ -211,5 +211,9 @@ export const countries = {
   "SUR": "Suriname",
   "SJM": "Svalbard and Jan",
   "URY": "Uruguay",
-  "VEN": "Venezuela"
+  "VEN": "Venezuela",
+  "THA": "Thailand",
+  "VNM": "Vietnam",
+  "SWE": "Sweden",
+  "USA": "United States"
 }

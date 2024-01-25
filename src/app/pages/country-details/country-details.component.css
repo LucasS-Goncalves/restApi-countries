@@ -1,4 +1,72 @@
+:host{
+  display: flex;
+  justify-content: center;
+}
+
+.loadingSpinner-container,
+.countriesList .error-container{
+  position: absolute;
+  top: 150px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.loader {
+  display: block;
+  color: #ffffff;
+  font-size: 45px;
+  text-indent: -9999em;
+  overflow: hidden;
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  position: relative;
+  transform: translateZ(0);
+  animation: mltShdSpin 1.7s infinite ease, round 1.7s infinite ease;
+}
+
+@keyframes mltShdSpin {
+  0% {
+    box-shadow: 0 -0.83em 0 -0.4em,
+    0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em,
+    0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+  }
+  5%,
+  95% {
+    box-shadow: 0 -0.83em 0 -0.4em,
+    0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em,
+    0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+  }
+  10%,
+  59% {
+    box-shadow: 0 -0.83em 0 -0.4em,
+    -0.087em -0.825em 0 -0.42em, -0.173em -0.812em 0 -0.44em,
+    -0.256em -0.789em 0 -0.46em, -0.297em -0.775em 0 -0.477em;
+  }
+  20% {
+    box-shadow: 0 -0.83em 0 -0.4em, -0.338em -0.758em 0 -0.42em,
+     -0.555em -0.617em 0 -0.44em, -0.671em -0.488em 0 -0.46em,
+     -0.749em -0.34em 0 -0.477em;
+  }
+  38% {
+    box-shadow: 0 -0.83em 0 -0.4em, -0.377em -0.74em 0 -0.42em,
+     -0.645em -0.522em 0 -0.44em, -0.775em -0.297em 0 -0.46em,
+     -0.82em -0.09em 0 -0.477em;
+  }
+  100% {
+    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em,
+    0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+  }
+}
+
+@keyframes round {
+  0% { transform: rotate(0deg) }
+  100% { transform: rotate(360deg) }
+}
+
+
 .article{
+  width: auto;
   display: flex;
   flex-direction: column;
   gap: 64px;
@@ -8,14 +76,27 @@
 .article .backButton{
   width: 104px;
   height: 32px;
+  font-size: .875rem;
+  font-weight: 300;
+  line-height: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  margin-left: 28px
+  border-radius: 2px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0px 0px 7px 0px rgba(0, 0, 0, 0.29);
+  background-color: var(--elements-color);
+  color: var(--text-color);
+}
+
+.article .backButton svg path{
+  fill: var(--text-color);
 }
 
 .article .container{
+  width: 320px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -31,7 +112,9 @@
 
 .article .container .info-container h2{
   font-size: 1.375rem;
+  font-weight: 800;
   margin-bottom: 16px;
+  color: var(--text-color);
 }
 
 .article .container .info-container .info{
@@ -43,6 +126,8 @@
 .article .container .info-container .info .info-list li{
   line-height: 32px;
   font-size: .875rem;
+  font-weight: 300;
+  color: var(--text-color);
 }
 
 .article .container .info-container .border-info{
@@ -61,7 +146,7 @@
 
 .article .container .info-container .border-info ul{
   display: grid;
-  grid-template-columns: 96px 96px 96px;
+  grid-template-columns: repeat(3, 96px);
   gap: 10px;
   align-items: center;
 }
@@ -70,13 +155,59 @@
   width: 96px;
   min-height: 28px;
   font-size: .75rem;
+  font-weight: 300;
   border-radius: 2px;
   background: var(--white);
   box-shadow: 0px 0px 4px 1px rgba(0, 0, 0, 0.10);
   display: flex;
   align-items: center;
   justify-content: center;
+  text-align: center;
   color: var(--text-color);
+  background-color: var(--elements-color);
+  cursor: pointer;
 }
 
+@media(min-width: 1100px){
 
+  .article .container{
+    width: auto;
+    flex-direction: row;
+    gap: 40px;
+  }
+
+  .article .container img{
+    width: 560px;
+    height: 401px;
+  }
+
+  .article .container .info-container h2{
+    font-size: 2rem;
+    margin-bottom: 23px;
+  }
+
+  .article .container .info-container .border-info{
+    margin-top: 68px;
+  }
+
+  .article .container .info-container .border-info ul{
+    grid-template-columns: repeat(4, 96px);
+    align-items: center;
+  }
+}
+
+@media(min-width: 1440px){
+
+  .article .container{
+    gap: 120px;
+  }
+
+  .article .container .info-container{
+    width: 574px;
+  }
+
+  .article .container .info-container .info,
+  .article .container .info-container .border-info{
+    flex-direction: row;
+  }
+}

@@ -4,7 +4,8 @@
   background-color: var(--elements-color);
   border-radius: 5px;
   padding-bottom: 46px;
-
+  cursor: pointer;
+  transition: transform .2s;
 }
 
 .article img{
@@ -42,3 +43,8 @@
   font-weight: 600;
 }
 
+@media(min-width: 1100px){
+  .article:hover{
+    transform: translateY(-5px);
+  }
+}

@@ -22,7 +22,18 @@
   <button class="resetButton" (click)="reset()">Reset filters</button>
 </div>
 <ul class="countriesList">
-  <li *ngFor="let country of (countries$ | async)">
-    <app-card [country]="country"></app-card>
-  </li>
+  <div class="loadingSpinner-container">
+    <span class="loader" *ngIf="loadingSpinner"></span>
+  </div>
+  <div class="error-container" *ngIf="errorMessage">
+    <h4>
+      No countries were found
+    </h4>
+  </div>
+  <div *ngFor="let country of countries">
+    <li *ngIf="displayCountries">
+      <app-card [country]="country"></app-card>
+    </li>
+  </div>
 </ul>
+

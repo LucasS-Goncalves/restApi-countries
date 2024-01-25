@@ -13,6 +13,6 @@ export class CardComponent {
   constructor(private router: Router){}
 
   loadCountry(){
-    this.router.navigate([this.country.name.common]);
+    this.router.navigate([ 'countries/' + this.country.name.common]);
   }
 }

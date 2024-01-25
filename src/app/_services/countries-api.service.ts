@@ -12,21 +12,16 @@ export class CountriesApiService {
 
   constructor(private http: HttpClient) { }
 
-  getCountries(){
-    return this.http.get<any>(this.baseUrl + 'all');
+  loadCountries(country = ''){
+    if(country.length === 0) return this.http.get<ICountry[]>(this.baseUrl + 'all');
+    return this.http.get<ICountry[]>(this.baseUrl + 'name/' + country);
   }
 
   filterByRegion(region: string){
-    return this.http.get<any>(this.baseUrl + 'region/' + region);
-  }
-
-  searchByCountryName(country: string){
-    if(country === '') return this.getCountries();
-    return this.http.get<ICountry[]>(this.baseUrl + 'name/' + country);
+    return this.http.get<ICountry[]>(this.baseUrl + 'region/' + region);
   }
 
   resetFilters(){
     this.seachCountryEvent.emit("");
-    return this.getCountries();
   }
 }

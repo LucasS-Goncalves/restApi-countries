@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params, Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, Params } from '@angular/router';
+import { Observable, Subscription } from 'rxjs';
 import { ICountry } from 'src/app/_interfaces/ICountry';
 import { CountriesApiService } from 'src/app/_services/countries-api.service';
 
@@ -9,20 +9,34 @@ import { CountriesApiService } from 'src/app/_services/countries-api.service';
   templateUrl: './country-details.component.html',
   styleUrls: ['./country-details.component.css']
 })
-export class CountryDetailsComponent implements OnInit{
+export class CountryDetailsComponent implements OnInit, OnDestroy{
 
   country$!: Observable<ICountry[]>;
   countryName!: string;
+  paramsSubscription!: Subscription;
 
-  constructor(private route: ActivatedRoute, private countriesApiService: CountriesApiService, private router: Router){}
+  loadingSpinner = true;
+  displayCountries = false;
+
+  constructor(private route: ActivatedRoute, private countriesApiService: CountriesApiService){}
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe({
+    this.paramsSubscription = this.route.paramMap.subscribe({
       next: (params: Params) => {
-        this.countryName = params['params']['country'];
+        const countryName = params['params']['country'];
+        this.country$ = this.countriesApiService.loadCountries(countryName);
+        this.loadingSpinner = false;
+        this.displayCountries = true;
       }
     })
-    this.country$ = this.countriesApiService.searchByCountryName(this.countryName);
+  }
+
+  back(){
+    window.history.back();
+  }
+
+  ngOnDestroy(): void {
+    this.paramsSubscription.unsubscribe();
   }
 
 }

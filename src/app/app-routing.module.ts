@@ -5,10 +5,16 @@ import { CountryDetailsComponent } from './pages/country-details/country-details
 
 const routes: Routes = [
   {
-    path: '', component: HomeComponent
+    path: 'countries', component: HomeComponent
   },
   {
-    path: ':country', component: CountryDetailsComponent
+    path: 'countries/:country', component: CountryDetailsComponent
+  },
+  {
+    path: '', redirectTo: 'countries', pathMatch: 'full'
+  },
+  {
+    path: '**', redirectTo: 'countries'
   }
 ];
 

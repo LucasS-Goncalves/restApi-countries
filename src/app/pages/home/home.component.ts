@@ -1,6 +1,6 @@
 import { SearchCountryComponent } from './../../_components/search-country/search-country.component';
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { Observable, Subscription, debounceTime, distinctUntilChanged, take } from 'rxjs';
+import { Observable, Subscription, debounceTime, distinctUntilChanged, filter, map, switchMap, take } from 'rxjs';
 import { ICountry } from 'src/app/_interfaces/ICountry';
 import { CountriesApiService } from 'src/app/_services/countries-api.service';
 
@@ -12,11 +12,13 @@ import { CountriesApiService } from 'src/app/_services/countries-api.service';
 export class HomeComponent implements OnInit, OnDestroy{
 
   dropdownOpened = false;
-  countries$!: Observable<ICountry[]>;
+  errorMessage = false;
+  loadingSpinner = true;
+  displayCountries = false;
 
-  regionDefaultText = 'Filter by Region';
+  countries!: ICountry[];
+  private readonly regionDefaultText = 'Filter by Region';
   region = this.regionDefaultText;
-
   typeheadSubscription!: Subscription;
 
   @ViewChild('appSearch') appSearch!: SearchCountryComponent;
@@ -24,34 +26,77 @@ export class HomeComponent implements OnInit, OnDestroy{
   constructor(private countriesApiService: CountriesApiService){}
 
   ngOnInit(): void {
-    this.countries$ = this.countriesApiService.getCountries();
-    this.searchContry();
-  }
+    this.countriesApiService.loadCountries().pipe(take(1)).subscribe({
+      next: res => {
+        this.countries = res;
+        this.displayCountries = true;
+        this.loadingSpinner = false;
+      }
+    });
 
-  searchContry(){
-    this.typeheadSubscription = this.countriesApiService.seachCountryEvent.pipe(
-      debounceTime(300),
-      distinctUntilChanged(),
-    ).subscribe({
-      next: (res: string) => {
-        if(res.length === 0) return;
-        this.countries$ = this.countriesApiService.searchByCountryName(res);
+    this.typeheadSubscription = this.searchContry().subscribe({
+      next: res => {
+        this.loadCountryByName(res);
       }
     });
   }
 
+  searchContry(){
+    return this.countriesApiService.seachCountryEvent.pipe(
+      debounceTime(300),
+      distinctUntilChanged(),
+    );
+  }
+
+  loadCountryByName(country: string){
+    this.displayCountries = false
+    this.loadingSpinner = true;
+    this.countriesApiService.loadCountries(country).pipe(take(1)).subscribe({
+      next: res => {
+        this.countries = res;
+        this.loadingSpinner = false;
+        this.errorMessage = false;
+        this.displayCountries = true;
+      },
+      error: () => {
+        this.loadingSpinner = false;
+        this.errorMessage = true;
+      }
+    })
+  }
+
   filterByRegion(region: string){
     if(this.region === region) return;
+    this.loadingSpinner = true;
+    this.displayCountries = false;
     this.region = region;
     this.appSearch.inputString = '';
-    this.countries$ = this.countriesApiService.filterByRegion(region);
+    this.countriesApiService.filterByRegion(region).pipe(take(1)).subscribe({
+      next: res => {
+        this.countries = res;
+        this.loadingSpinner = false;
+        this.displayCountries = true;
+      }
+    });
   }
 
   reset(){
     if(this.appSearch.inputString === '' && this.region === this.regionDefaultText) return;
+
+    if(this.appSearch.inputString === '' && this.region !== this.regionDefaultText) {
+      this.countriesApiService.loadCountries().pipe(take(1)).subscribe({
+        next: res => {
+          this.countries = res;
+          this.displayCountries = true;
+          this.loadingSpinner = false;
+        }
+      });
+    }
+    this.loadingSpinner = true;
+    this.displayCountries = false;
     this.appSearch.inputString = '';
     this.region = this.regionDefaultText;
-    this.countries$ = this.countriesApiService.resetFilters();
+    this.countriesApiService.resetFilters();
   }
 
   dropdownToggle(){
