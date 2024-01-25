@@ -13,7 +13,7 @@
 
 .loader {
   display: block;
-  color: #ffffff;
+  color: var(--text-color);
   font-size: 45px;
   text-indent: -9999em;
   overflow: hidden;
